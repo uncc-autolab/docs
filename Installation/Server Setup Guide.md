@@ -145,7 +145,22 @@
    docker build -t autograding_MY_COURSE vmms/MY_COURSE/;
    ```
 
+3. Add a mapping for your autograding VM in  *autolab-oneclick/server/docker-compose.yml*. This is useful in updating your VM post-installation.
 
+   ```
+   tango:
+     build: ./Tango
+     command: sh start.sh
+     ports:
+       - '8600:8600'
+     privileged: true
+     volumes: 
+     - ./Tango/config.py:/opt/TangoService/Tango/config.py
+     - ./Tango/start.sh:/opt/TangoService/Tango/start.sh
+     - ./Tango/vmms/MY_COURSE:/opt/TangoService/Tango/vmms/MY_COURSE  # <-- Add this line for MY_COURSE
+   ```
+
+   
 
 ## 3. Install
 
